@@ -178,8 +178,10 @@ WEBP_NODISCARD static int ZeroFillCanvas(uint8_t* buf, uint32_t canvas_width,
 static void ZeroFillFrameRect(uint8_t* buf, int buf_stride, int x_offset,
                               int y_offset, int width, int height) {
   int j;
+  const uint32_t x = (uint32_t)x_offset * NUM_CHANNELS;  // 26 bits
+  const uint64_t y = (uint64_t)y_offset * buf_stride;
   assert(width * NUM_CHANNELS <= buf_stride);
-  buf += y_offset * buf_stride + x_offset * NUM_CHANNELS;
+  buf += y + x;
   for (j = 0; j < height; ++j) {
     WEBP_UNSAFE_MEMSET(buf, 0, width * NUM_CHANNELS);
     buf += buf_stride;
