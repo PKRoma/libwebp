@@ -48,7 +48,7 @@ void EncTestImpl(WebPPicture& pic, uint32_t optimization_index, bool use_argb,
 
   // Skip the cruncher except on small images, it's likely to timeout.
   if (config.lossless && config.quality == 100. && config.method == 6 &&
-      pic.width * pic.height >= 16384) {
+      pic.width * pic.height >= 10000) {
     config.lossless = 0;
   }
 
